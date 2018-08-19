@@ -1,0 +1,11 @@
+[alias]
+	st = status
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lgb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches
+[user]
+	email = p@pascalsommer.ch
+	name = Pascal Sommer
+[push]
+	default = simple
+[core]
+	editor = emacs
