@@ -1,0 +1,8 @@
+*
+!.gitignore
+
+!.gitconfig
+!.emacs
+!.config/sublime-text-3/Packages/User/*
+!.bash_aliases
+!.bashrc
