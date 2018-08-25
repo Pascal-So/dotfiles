@@ -6,3 +6,15 @@
 !.config/sublime-text-3/Packages/User/*
 !.bash_aliases
 !.bashrc
+
+!.xmobarrc
+!.xmonad
+!.xmonad/xmonad.hs
+
+!.config/
+!.config/rofi
+!.config/rofi/config
+
+!.inputrc
+
+!.xinitrc
