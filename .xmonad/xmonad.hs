@@ -10,17 +10,37 @@ import XMonad.Hooks.EwmhDesktops
 import Data.Map    (fromList)
 import Data.Monoid (mappend)
 
-myLayoutHook = spacingRaw False (Border 4 21 4 4) True (Border 4 4 4 4) True $
-               layoutHook def
+import qualified XMonad.StackSet as W
+
+myTerminal = "termite"
+
+myWorkspaces = ["1:term","2:web","3:code"] ++ map show [4..9]
+
+myLayoutHook = spacingRaw True (Border 4 4 4 4) True (Border 4 4 4 4) True $
+               myLayout
+
+myLayout = 
+    avoidStruts (
+        Tall 1 (3/100) (1/2)
+    ) ||| 
+    Full
 
 myManageHook = composeAll
-    [ className =? "Xmessage" --> doFloat
+    [ className =? "Xmessage"      --> doFloat
+    , className =? "Chromium"      --> doShift "2:web"
+    , className =? "Google-chrome" --> doShift "2:web"
+    , className =? "Firefox"       --> doShift "2:web"
     , manageDocks
     ]
 
-myConfig = desktopConfig
-    { terminal           = "termite"
+myLogHook xmproc = do
+    historyHook
+    ewmhDesktopsLogHook
+
+myConfig xmproc = desktopConfig
+    { terminal           = myTerminal
     , modMask            = mod4Mask
+    , workspaces         = myWorkspaces
     , borderWidth        = 4
     , focusFollowsMouse  = False
     , clickJustFocuses   = False
@@ -28,7 +48,7 @@ myConfig = desktopConfig
     , focusedBorderColor = "#3a6fc4"
     , layoutHook         = myLayoutHook
     , manageHook         = myManageHook
-    , logHook            = historyHook >> ewmhDesktopsLogHook
+    , logHook            = myLogHook xmproc
     }
     `removeKeys`
     [ (mod4Mask, xK_space) -- using this for switching language
@@ -52,12 +72,20 @@ printscreenShortcuts = do
 
     return ((modFullscreen .|. modOutput, xK_Print), spawn $ "maim " ++ maim_opts ++ output)
 
+
+
 myKeys :: [((KeyMask, KeySym), X ())]
 myKeys = [ ((mod4Mask, xK_Tab), sendMessage NextLayout)
+         , ((mod1Mask, xK_Tab), nextMatch History (return True))
+
          , ((mod4Mask, xK_p ), spawn "rofi -show combi")
+
+         , ((mod4Mask, xK_Return), spawn myTerminal)
+         , ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
          ]
          ++ printscreenShortcuts
 
 
 main = do
-    xmonad myConfig
+    -- xmproc <- spawnPipe "xmobar -d"
+    xmonad =<< xmobar (myConfig ())

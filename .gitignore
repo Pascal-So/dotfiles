@@ -14,7 +14,11 @@
 !.config/
 !.config/rofi
 !.config/rofi/config
+!.config/termite
+!.config/termite/config
 
 !.inputrc
 
 !.xinitrc
+
+!.ghci
