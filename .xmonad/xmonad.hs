@@ -1,6 +1,10 @@
+{-# LANGUAGE FlexibleContexts #-}
+
 import XMonad
 import XMonad.Config.Desktop
 import XMonad.Layout.Spacing
+import XMonad.Layout.NoBorders
+import XMonad.Layout.LayoutModifier
 import XMonad.Util.EZConfig
 import XMonad.Hooks.ManageDocks
 import XMonad.Actions.GroupNavigation
@@ -14,32 +18,37 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import System.Exit
 
+
+myTerminal :: String
 myTerminal = "termite"
 
+myWorkspaces :: [String]
 myWorkspaces = ["1:term","2:web","3:code"] ++ map show [4..9]
 
-myLayoutHook = spacingRaw True (Border 4 4 4 4) True (Border 4 4 4 4) True $
+myLayoutHook = smartBorders $
+               spacingRaw True (Border 4 4 4 4) True (Border 4 4 4 4) True $
                myLayout
 
-myLayout = 
+myLayout =
     avoidStruts (
         Tall 1 (3/100) (1/2)
-    ) ||| 
+    ) |||
     Full
 
 myManageHook = composeAll
-    [ className =? "Xmessage"      --> doFloat
-    , className =? "Chromium"      --> doShift "2:web"
-    , className =? "Google-chrome" --> doShift "2:web"
-    , className =? "Firefox"       --> doShift "2:web"
+    [ className =? "Xmessage"                  --> doFloat
+    , className =? "File Operation Progress"   --> doFloat
+    , className =? "Chromium"                  --> doShift "2:web"
+    , className =? "Google-chrome"             --> doShift "2:web"
+    , className =? "Firefox"                   --> doShift "2:web"
     , manageDocks
     ]
 
-myLogHook xmproc = do
+myLogHook = do
     historyHook
     ewmhDesktopsLogHook
 
-myConfig xmproc = desktopConfig
+myConfig = desktopConfig
     { terminal           = myTerminal
     , modMask            = mod4Mask
     , workspaces         = myWorkspaces
@@ -50,7 +59,7 @@ myConfig xmproc = desktopConfig
     , focusedBorderColor = "#3a6fc4"
     , layoutHook         = myLayoutHook
     , manageHook         = myManageHook
-    , logHook            = myLogHook xmproc
+    , logHook            = myLogHook
 
     , keys               = myKeys
     }
@@ -62,6 +71,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask,               xK_Return), spawn $ terminal conf)
     , ((modMask,               xK_p     ), spawn "rofi -show combi")
     , ((modMask .|. shiftMask, xK_p     ), spawn "rofi -show run")
+    , ((modMask,               xK_e     ), spawn "thunar")
     , ((modMask .|. shiftMask, xK_c     ), kill)
 
     , ((modMask,               xK_Tab   ), sendMessage NextLayout)
@@ -145,6 +155,25 @@ workspaceShortcuts conf@(XConfig {modMask = modMask}) = do
     [((modMask .|. mod, key), windows $ action workspace)]
 
 
+-- xmobar stuff
+
+myXmobar :: LayoutClass l Window
+         => XConfig l -> IO (XConfig (ModifiedLayout AvoidStruts l))
+myXmobar conf = statusBar "xmobar" myXmobarPP (\XConfig{modMask = modm} -> (modm, xK_b )) conf
+
+replaceWsIcons :: String -> String
+replaceWsIcons ('3':_) = "3:<icon=.icons/code.xbm/>"
+replaceWsIcons other = other
+
+myXmobarPP :: PP
+myXmobarPP = def { ppCurrent = xmobarColor "#6f6" "" . wrap "[" "]" . replaceWsIcons
+                 , ppHiddenNoWindows = replaceWsIcons
+                 , ppHidden  = (:) '*' . replaceWsIcons
+                 , ppTitle   = const "" -- xmobarColor "#6f6"  "" . shorten 40
+                 , ppLayout  = last . words
+                 , ppVisible = wrap "(" ")"
+                 , ppUrgent  = xmobarColor "#f66" "#fb5"
+                 }
+
 main = do
-    -- xmproc <- spawnPipe "xmobar -d"
-    xmonad =<< xmobar (myConfig ())
+    xmonad =<< myXmobar myConfig
