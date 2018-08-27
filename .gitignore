@@ -1,13 +1,14 @@
 *
 !.gitignore
-
 !.gitconfig
-!.emacs
-!.config/sublime-text-3/Packages/User/*
+
 !.bash_aliases
 !.bashrc
 
+!.emacs
+
 !.xmobarrc
+!.stalonerc
 !.xmonad
 !.xmonad/xmonad.hs
 
@@ -16,6 +17,10 @@
 !.config/rofi/config
 !.config/termite
 !.config/termite/config
+!.config/sublime-text-3
+!.config/sublime-text-3/Packages
+!.config/sublime-text-3/Packages/User
+!.config/sublime-text-3/Packages/User/*
 
 !.inputrc
 

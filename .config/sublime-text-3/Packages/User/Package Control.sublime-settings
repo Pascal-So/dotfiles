@@ -1,0 +1,15 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Laravel Blade Highlighter",
+		"LaTeXTools",
+		"Package Control",
+		"PureScript",
+		"Sass",
+		"Vue Syntax Highlight"
+	]
+}
