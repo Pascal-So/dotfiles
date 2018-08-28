@@ -47,3 +47,5 @@ color18 = #202020
 color19 = #303030
 color20 = #505050
 color21 = #808080
+
+scrollback_lines = 10000

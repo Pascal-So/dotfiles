@@ -30,3 +30,6 @@
 
 !.icons
 !.icons/*
+
+!Readme.md
+!.arch_setup.png
