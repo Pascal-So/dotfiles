@@ -38,6 +38,7 @@ myLayout =
 myManageHook = composeAll
     [ className =? "Xmessage"                  --> doFloat
     , className =? "File Operation Progress"   --> doFloat
+
     , className =? "Chromium"                  --> doShift "2:web"
     , className =? "Google-chrome"             --> doShift "2:web"
     , className =? "Firefox"                   --> doShift "2:web"
@@ -63,6 +64,7 @@ myConfig = desktopConfig
 
     , keys               = myKeys
     }
+    `additionalKeysP` addKeys
 
 
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
@@ -113,7 +115,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     ++ workspaceShortcuts conf
     ++ screenShortcuts conf
 
-
 -- Cartesian product of the screenshot options
 -- Shift activates fullscreen
 -- Control activates file output instead of clipboard
@@ -153,6 +154,14 @@ workspaceShortcuts conf@(XConfig {modMask = modMask}) = do
     (action, mod) <- [(W.greedyView, 0), (W.shift, shiftMask)]
 
     [((modMask .|. mod, key), windows $ action workspace)]
+
+addKeys = [ ("<XF86AudioLowerVolume>",  spawn "amixer -q sset Master 2%-"   )
+          , ("<XF86AudioRaiseVolume>",  spawn "amixer -q sset Master 2%+"   )
+          , ("<XF86AudioMute>",         spawn "amixer -q sset Master toggle")
+          , ("<XF86MonBrightnessDown>", spawn "light -U 10"                 )
+          , ("<XF86MonBrightnessUp>",   spawn "light -A 10"                 )
+          -- , ("<XF86AudioPlay>",   spawn "play-pause-mpd.sh"       )
+          ]
 
 
 -- xmobar stuff

@@ -1,5 +1,4 @@
 Config { 
-
    -- appearance
      font =         "xft:Bitstream Vera Sans Mono:size=10:bold:antialias=true"
    , bgColor =      "#121212"
@@ -9,7 +8,7 @@ Config {
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = " %multicpu%  %coretemp%  %memory%  |  %dynnetwork%  |  %StdinReader%}{ %date% || %kbd% "
+   , template = " %multicpu%  %coretemp%  %memory%  %battery%  <icon=src/Dotfiles/Arch/.xmonad/.icons/vol1.xbm/> %volume%  |  %dynnetwork%  |  %StdinReader%}{ %date% || %kbd% "
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
@@ -62,6 +61,23 @@ Config {
                              , "--high"     , "#f66"
                              ] 10
 
+        -- battery monitor
+        , Run Battery        [ "--template" , "<icon=.icons/batt_full.xbm/> <acstatus>"
+                             , "--Low"      , "10"        -- units: %
+                             , "--High"     , "80"        -- units: %
+                             , "--low"      , "#f66"
+                             , "--normal"   , "#fb5"
+                             , "--high"     , "#6f6"
+
+                             , "--" -- battery specific options
+                                       -- discharging status
+                                       , "-o" , "<left>% (<timeleft>)"
+                                       -- AC "on" status
+                                       , "-O" , "<fc=#fb5>Charging</fc>"
+                                       -- charged status
+                                       , "-i" , "<fc=#6f6>Charged</fc>"
+                             ] 50
+
         -- time and date indicator 
         --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
         , Run Date           "<fc=#ABABAB>%F (%a) %T (%Z)</fc>" "date" 10
@@ -71,6 +87,8 @@ Config {
                              , ("ch"    , "<fc=#d82222>CH</fc>")
                              , ("ru"    , "<fc=#3e7de0>RU</fc>")
                              ] 
+
+        , Run Com ".scripts/vol.sh" [] "volume" 1
 
         , Run StdinReader
         ]
