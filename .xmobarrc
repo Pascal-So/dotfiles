@@ -1,95 +1,42 @@
 Config { 
    -- appearance
-     font =         "xft:Bitstream Vera Sans Mono:size=10:bold:antialias=true"
-   , bgColor =      "#121212"
-   , fgColor =      "#dcdccc"
-   , position =     Bottom
+     font =             "xft:Bitstream Vera Sans Mono:size=11:antialias=true"
+   , bgColor =          "#121212"
+   , fgColor =          "#eeeeee"
+   , position =         Static { xpos = 0
+                               , ypos = 1052
+                               , width = 1919
+                               , height = 28
+                               }
 
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = " %multicpu%  %coretemp%  %memory%  %battery%  <icon=src/Dotfiles/Arch/.xmonad/.icons/vol1.xbm/> %volume%  |  %dynnetwork%  |  %StdinReader%}{ %date% || %kbd% "
+   , template = " %battery%  <icon=src/Dotfiles/Arch/.xmonad/.icons/vol1.xbm/> %volume%} %StdinReader% { %date% || %kbd%    "
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
    , hideOnStart =      False   -- start with window unmapped (hidden)
-   , allDesktops =      True    -- show on all desktops
+   , allDesktops =      False    -- show on all desktops
    , overrideRedirect = True    -- set the Override Redirect flag (Xlib)
    , pickBroadest =     False   -- choose widest display (multi-monitor)
    , persistent =       True    -- enable/disable hiding (True = disabled)
 
-   -- plugins
-   --
-   --   The --template option controls how the plugin is displayed. Text
-   --   color can be set by enclosing in <fc></fc> tags. For more details
-   --   see http://projects.haskell.org/xmobar/#system-monitor-plugins.
    , commands = 
-
-        -- network activity monitor (dynamic interface resolution)
-        [ Run DynNetwork     [ "--template" , "<dev>: u<tx>kB/s d<rx>kB/s"
-                             , "--Low"      , "1000"       -- units: B/s
-                             , "--High"     , "5000"       -- units: B/s
-                             , "--low"      , "#6f6"
-                             , "--normal"   , "#fb5"
-                             , "--high"     , "#f66"
+        [ Run Memory         [ "--template" ,"<icon=.icons/mem.xbm/> <usedratio>%"
                              ] 10
-
-        -- cpu activity monitor
-        , Run MultiCpu       [ "--template" , "<icon=.icons/cpu.xbm/> <total0>/<total1>/<total2>/<total3>/<total4>/<total5>/<total6>/<total7>%"
-                             , "--Low"      , "50"         -- units: %
-                             , "--High"     , "85"         -- units: %
-                             , "--low"      , "#6f6"
-                             , "--normal"   , "#fb5"
-                             , "--high"     , "#f66"
-                             ] 10
-
-        -- cpu core temperature monitor
-        , Run CoreTemp       [ "--template" , "<icon=.icons/temp1.xbm/> <core0>/<core1>/<core2>/<core3>°C"
-                             , "--Low"      , "70"        -- units: °C
-                             , "--High"     , "80"        -- units: °C
-                             , "--low"      , "#6f6"
-                             , "--normal"   , "#fb5"
-                             , "--high"     , "#f66"
-                             ] 50
-
-        -- memory usage monitor
-        , Run Memory         [ "--template" ,"<icon=.icons/mem.xbm/> <usedratio>%"
-                             , "--Low"      , "20"        -- units: %
-                             , "--High"     , "90"        -- units: %
-                             , "--low"      , "#6f6"
-                             , "--normal"   , "#fb5"
-                             , "--high"     , "#f66"
-                             ] 10
-
-        -- battery monitor
         , Run Battery        [ "--template" , "<icon=.icons/batt_full.xbm/> <acstatus>"
-                             , "--Low"      , "10"        -- units: %
-                             , "--High"     , "80"        -- units: %
-                             , "--low"      , "#f66"
-                             , "--normal"   , "#fb5"
-                             , "--high"     , "#6f6"
-
                              , "--" -- battery specific options
-                                       -- discharging status
-                                       , "-o" , "<left>% (<timeleft>)"
-                                       -- AC "on" status
+                                       , "-o" , "<left>%, <timeleft>"
                                        , "-O" , "<fc=#fb5>Charging</fc>"
-                                       -- charged status
                                        , "-i" , "<fc=#6f6>Charged</fc>"
                              ] 50
-
-        -- time and date indicator 
-        --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
         , Run Date           "<fc=#ABABAB>%F (%a) %T (%Z)</fc>" "date" 10
-
-        -- keyboard layout indicator
         , Run Kbd            [ ("gb"    , "<fc=#a7b4e5>GB</fc>")
                              , ("ch"    , "<fc=#d82222>CH</fc>")
                              , ("ru"    , "<fc=#3e7de0>RU</fc>")
                              ] 
-
-        , Run Com ".scripts/vol.sh" [] "volume" 1
-
+        , Run Com "scripts/vol.sh" [] "volume" 4
         , Run StdinReader
         ]
    }

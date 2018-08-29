@@ -1,6 +1,10 @@
 rofi &
 
 xmobar &
+stalonetray &
+nm-applet &
+
+dunst &
 
 numlockx &
 

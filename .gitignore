@@ -8,7 +8,7 @@
 !.emacs
 
 !.xmobarrc
-!.stalonerc
+!.stalonetrayrc
 !.xmonad
 !.xmonad/xmonad.hs
 
@@ -21,6 +21,8 @@
 !.config/sublime-text-3/Packages
 !.config/sublime-text-3/Packages/User
 !.config/sublime-text-3/Packages/User/*
+!.config/dunst
+!.config/dunst/dunstrc
 
 !.inputrc
 

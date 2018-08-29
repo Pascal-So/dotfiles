@@ -1,0 +1,9 @@
+geometry 1x1+1896+1059
+icon_size 19
+sticky 1
+window_type dock
+dockapp_mode none
+window_strut bottom
+skip_taskbar 1
+icon_gravity NE
+background "#121212"

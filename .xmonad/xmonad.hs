@@ -7,6 +7,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.LayoutModifier
 import XMonad.Util.EZConfig
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Actions.GroupNavigation
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
@@ -23,7 +24,11 @@ myTerminal :: String
 myTerminal = "termite"
 
 myWorkspaces :: [String]
-myWorkspaces = ["1:term","2:web","3:code"] ++ map show [4..9]
+myWorkspaces = [ "term" -- <fn=1>\xf120</fn>" -- term
+               , "web"  -- <fn=1>\xf0ac</fn>" -- web
+               , "code" -- <fn=1>\xf121</fn>" -- code
+               , "mail" -- <fn=1>\xf0e0</fn>" -- mail
+               ] ++ map show [5..9] -- other
 
 myLayoutHook = smartBorders $
                spacingRaw True (Border 4 4 4 4) True (Border 4 4 4 4) True $
@@ -36,12 +41,12 @@ myLayout =
     Full
 
 myManageHook = composeAll
-    [ className =? "Xmessage"                  --> doFloat
-    , className =? "File Operation Progress"   --> doFloat
+    [ className =? "Xmessage"                  --> doCenterFloat
+    , className =? "File Operation Progress"   --> doCenterFloat
 
-    , className =? "Chromium"                  --> doShift "2:web"
-    , className =? "Google-chrome"             --> doShift "2:web"
-    , className =? "Firefox"                   --> doShift "2:web"
+    , className =? "Chromium"                  --> doShift (myWorkspaces !! 1)
+    , className =? "Google-chrome"             --> doShift (myWorkspaces !! 1)
+    , className =? "Firefox"                   --> doShift (myWorkspaces !! 1)
     , manageDocks
     ]
 
@@ -151,7 +156,7 @@ workspaceShortcuts conf@(XConfig {modMask = modMask}) = do
     let numpadKeys = [xK_KP_End, xK_KP_Down, xK_KP_Page_Down, xK_KP_Left, xK_KP_Begin, xK_KP_Right, xK_KP_Home, xK_KP_Up, xK_KP_Page_Up]
     numberkeys <- [[xK_1 .. xK_9], numpadKeys]
     (key, workspace) <- zip numberkeys (workspaces conf)
-    (action, mod) <- [(W.greedyView, 0), (W.shift, shiftMask)]
+    (action, mod) <- [(W.view, 0), (W.shift, shiftMask)]
 
     [((modMask .|. mod, key), windows $ action workspace)]
 
@@ -170,16 +175,11 @@ myXmobar :: LayoutClass l Window
          => XConfig l -> IO (XConfig (ModifiedLayout AvoidStruts l))
 myXmobar conf = statusBar "xmobar" myXmobarPP (\XConfig{modMask = modm} -> (modm, xK_b )) conf
 
-replaceWsIcons :: String -> String
-replaceWsIcons ('3':_) = "3:<icon=.icons/code.xbm/>"
-replaceWsIcons other = other
-
 myXmobarPP :: PP
-myXmobarPP = def { ppCurrent = xmobarColor "#6f6" "" . wrap "[" "]" . replaceWsIcons
-                 , ppHiddenNoWindows = replaceWsIcons
-                 , ppHidden  = (:) '*' . replaceWsIcons
+myXmobarPP = def { ppCurrent = xmobarColor "#3a6fc4" "" . wrap "[" "]"
+                 , ppHidden  = (:) '*'
                  , ppTitle   = const "" -- xmobarColor "#6f6"  "" . shorten 40
-                 , ppLayout  = last . words
+                 , ppLayout  = const "" -- last . words
                  , ppVisible = wrap "(" ")"
                  , ppUrgent  = xmobarColor "#f66" "#fb5"
                  }
