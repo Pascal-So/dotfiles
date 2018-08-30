@@ -36,7 +36,7 @@ Config {
                              , ("ch"    , "<fc=#d82222>CH</fc>")
                              , ("ru"    , "<fc=#3e7de0>RU</fc>")
                              ] 
-        , Run Com "scripts/vol.sh" [] "volume" 4
+        , Run Com "scripts/vol.sh" [] "volume" 3
         , Run StdinReader
         ]
    }

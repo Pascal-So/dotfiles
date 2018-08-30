@@ -28,7 +28,8 @@ myWorkspaces = [ "term" -- <fn=1>\xf120</fn>" -- term
                , "web"  -- <fn=1>\xf0ac</fn>" -- web
                , "code" -- <fn=1>\xf121</fn>" -- code
                , "mail" -- <fn=1>\xf0e0</fn>" -- mail
-               ] ++ map show [5..9] -- other
+               , "files"
+               ] ++ map show [6..9] -- other
 
 myLayoutHook = smartBorders $
                spacingRaw True (Border 4 4 4 4) True (Border 4 4 4 4) True $
@@ -156,7 +157,7 @@ workspaceShortcuts conf@(XConfig {modMask = modMask}) = do
     let numpadKeys = [xK_KP_End, xK_KP_Down, xK_KP_Page_Down, xK_KP_Left, xK_KP_Begin, xK_KP_Right, xK_KP_Home, xK_KP_Up, xK_KP_Page_Up]
     numberkeys <- [[xK_1 .. xK_9], numpadKeys]
     (key, workspace) <- zip numberkeys (workspaces conf)
-    (action, mod) <- [(W.view, 0), (W.shift, shiftMask)]
+    (action, mod) <- [(W.greedyView, 0), (W.shift, shiftMask)]
 
     [((modMask .|. mod, key), windows $ action workspace)]
 
@@ -177,7 +178,7 @@ myXmobar conf = statusBar "xmobar" myXmobarPP (\XConfig{modMask = modm} -> (modm
 
 myXmobarPP :: PP
 myXmobarPP = def { ppCurrent = xmobarColor "#3a6fc4" "" . wrap "[" "]"
-                 , ppHidden  = (:) '*'
+                 , ppHidden  = id
                  , ppTitle   = const "" -- xmobarColor "#6f6"  "" . shorten 40
                  , ppLayout  = const "" -- last . words
                  , ppVisible = wrap "(" ")"
