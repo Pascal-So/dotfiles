@@ -23,13 +23,24 @@ import System.Exit
 myTerminal :: String
 myTerminal = "termite"
 
-myWorkspaces :: [String]
+myWorkspaces :: [WorkspaceId]
 myWorkspaces = [ "term" -- <fn=1>\xf120</fn>" -- term
                , "web"  -- <fn=1>\xf0ac</fn>" -- web
                , "code" -- <fn=1>\xf121</fn>" -- code
                , "mail" -- <fn=1>\xf0e0</fn>" -- mail
                , "files"
                ] ++ map show [6..9] -- other
+
+lookupWorkspaceNr :: WorkspaceId -> Int
+lookupWorkspaceNr "term" = 1
+lookupWorkspaceNr "web" = 2
+lookupWorkspaceNr "code" = 3
+lookupWorkspaceNr "mail" = 4
+lookupWorkspaceNr "files" = 5
+lookupWorkspaceNr "6" = 6
+lookupWorkspaceNr "7" = 7
+lookupWorkspaceNr "8" = 8
+lookupWorkspaceNr "9" = 9
 
 myLayoutHook = smartBorders $
                spacingRaw True (Border 4 4 4 4) True (Border 4 4 4 4) True $
@@ -80,7 +91,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_p     ), spawn "rofi -show combi")
     , ((modMask .|. shiftMask, xK_p     ), spawn "rofi -show run")
     , ((modMask,               xK_e     ), spawn "thunar")
-    , ((modMask .|. shiftMask, xK_c     ), kill)
+    , ((mod1Mask,              xK_F4    ), kill)
 
     , ((modMask,               xK_Tab   ), sendMessage NextLayout)
     , ((modMask .|. shiftMask, xK_Tab   ), setLayout $ layoutHook conf) -- reset layout
@@ -174,11 +185,11 @@ addKeys = [ ("<XF86AudioLowerVolume>",  spawn "amixer -q sset Master 2%-"   )
 
 myXmobar :: LayoutClass l Window
          => XConfig l -> IO (XConfig (ModifiedLayout AvoidStruts l))
-myXmobar conf = statusBar "xmobar" myXmobarPP (\XConfig{modMask = modm} -> (modm, xK_b )) conf
+myXmobar conf = statusBar "tee ~/xmobarlog | xmobar" myXmobarPP (\XConfig{modMask = modm} -> (modm, xK_b )) conf
 
 myXmobarPP :: PP
 myXmobarPP = def { ppCurrent = xmobarColor "#3a6fc4" "" . wrap "[" "]"
-                 , ppHidden  = id
+                 , ppHidden  = \name -> "<action=`xdotool key super+" ++ show (lookupWorkspaceNr name) ++ "`><fn=1>" ++ name ++ "</fn></action>"
                  , ppTitle   = const "" -- xmobarColor "#6f6"  "" . shorten 40
                  , ppLayout  = const "" -- last . words
                  , ppVisible = wrap "(" ")"

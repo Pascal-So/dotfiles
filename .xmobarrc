@@ -1,6 +1,7 @@
 Config { 
    -- appearance
      font =             "xft:Bitstream Vera Sans Mono:size=11:antialias=true"
+   , additionalFonts =  ["xft:Bitstream Vera Sans Mono:size=09:antialias=true"]
    , bgColor =          "#121212"
    , fgColor =          "#eeeeee"
    , position =         Static { xpos = 0
@@ -12,7 +13,7 @@ Config {
    -- layout
    , sepChar =  "%"   -- delineator between plugin names and straight text
    , alignSep = "}{"  -- separator between left-right alignment
-   , template = " %battery%  <icon=src/Dotfiles/Arch/.xmonad/.icons/vol1.xbm/> %volume%} %StdinReader% { %date% || %kbd%    "
+   , template = " %battery%  <action=`termite -e alsamixer`><icon=src/Dotfiles/Arch/.xmonad/.icons/vol1.xbm/> %volume%</action>} %UnsafeStdinReader% { %date% || %kbd%    "
 
    -- general behavior
    , lowerOnStart =     True    -- send to bottom of window stack on start
@@ -37,6 +38,6 @@ Config {
                              , ("ru"    , "<fc=#3e7de0>RU</fc>")
                              ] 
         , Run Com "scripts/vol.sh" [] "volume" 3
-        , Run StdinReader
+        , Run UnsafeStdinReader
         ]
    }
