@@ -168,9 +168,9 @@ workspaceShortcuts conf@(XConfig {modMask = modMask}) = do
     let numpadKeys = [xK_KP_End, xK_KP_Down, xK_KP_Page_Down, xK_KP_Left, xK_KP_Begin, xK_KP_Right, xK_KP_Home, xK_KP_Up, xK_KP_Page_Up]
     numberkeys <- [[xK_1 .. xK_9], numpadKeys]
     (key, workspace) <- zip numberkeys (workspaces conf)
-    (action, mod) <- [(W.greedyView, 0), (W.shift, shiftMask)]
+    (action, mod) <- [(windows . W.greedyView, 0), ((\ws -> windows (W.shift ws) >> windows (W.greedyView ws)), shiftMask)]
 
-    [((modMask .|. mod, key), windows $ action workspace)]
+    [((modMask .|. mod, key), action workspace)]
 
 addKeys = [ ("<XF86AudioLowerVolume>",  spawn "amixer -q sset Master 2%-"   )
           , ("<XF86AudioRaiseVolume>",  spawn "amixer -q sset Master 2%+"   )
@@ -185,7 +185,7 @@ addKeys = [ ("<XF86AudioLowerVolume>",  spawn "amixer -q sset Master 2%-"   )
 
 myXmobar :: LayoutClass l Window
          => XConfig l -> IO (XConfig (ModifiedLayout AvoidStruts l))
-myXmobar conf = statusBar "tee ~/xmobarlog | xmobar" myXmobarPP (\XConfig{modMask = modm} -> (modm, xK_b )) conf
+myXmobar conf = statusBar "xmobar 2>>~/.xmobar.out.stderr >> ~/.xmobar.out" myXmobarPP (\XConfig{modMask = modm} -> (modm, xK_b )) conf
 
 myXmobarPP :: PP
 myXmobarPP = def { ppCurrent = xmobarColor "#3a6fc4" "" . wrap "[" "]"
