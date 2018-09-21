@@ -13,10 +13,12 @@
 !.xmonad/xmonad.hs
 
 !.config/
+!.config/xfiles
+!.config/xfiles/*
+!.config/xfiles/themes/*
+
 !.config/rofi
 !.config/rofi/config
-!.config/termite
-!.config/termite/config
 !.config/sublime-text-3
 !.config/sublime-text-3/Packages
 !.config/sublime-text-3/Packages/User

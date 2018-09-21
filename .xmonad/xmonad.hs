@@ -12,6 +12,9 @@ import XMonad.Actions.GroupNavigation
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 
+import XMonad.Prompt
+import XMonad.Prompt.XMonad
+
 import Data.Map    (fromList)
 import Data.Monoid (mappend)
 
@@ -21,7 +24,13 @@ import System.Exit
 
 
 myTerminal :: String
-myTerminal = "termite"
+myTerminal = "urxvt"
+
+lockCommand :: String
+lockCommand = "i3lock -c 121212 -l bbbbbb -O 0.03 -o bbbbbb --no-input-visualisation -F 45 -R 160 -e"
+
+restartXMonadCommand :: String
+restartXMonadCommand = "if type xmonad; then xmonad --recompile && xmonad --restart; else xmessage xmonad not in \\$PATH: \"$PATH\"; fi"
 
 myWorkspaces :: [WorkspaceId]
 myWorkspaces = [ "term" -- <fn=1>\xf120</fn>" -- term
@@ -106,14 +115,14 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- lock screen
     -- uses https://github.com/cac03/i3lock
-    , ((mod1Mask .|. mod4Mask, xK_l     ), spawn "i3lock -c 121212 -l bbbbbb -O 0.03 -o bbbbbb --no-input-visualisation -F 45 -R 160 -e")
+    , ((mod1Mask .|. mod4Mask, xK_l     ), spawn lockCommand)
 
     -- modifying the window order
     , ((modMask .|. shiftMask, xK_Return), windows W.swapMaster)
     , ((modMask .|. shiftMask, xK_j     ), windows W.swapDown  )
     , ((modMask .|. shiftMask, xK_k     ), windows W.swapUp    )
 
-    -- resizing the master/slave ratio
+    -- resizing the master/side ratio
     , ((modMask,               xK_h     ), sendMessage Shrink)
     , ((modMask,               xK_l     ), sendMessage Expand)
 
@@ -125,8 +134,10 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_period), sendMessage (IncMasterN (-1)))
 
     -- quit, or restart
+    -- , ((modMask .|. shiftMask, xK_q     ), xmonadPromptC systemPromptCmds def)
     , ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
-    , ((modMask,               xK_q     ), spawn "if type xmonad; then xmonad --recompile && xmonad --restart; else xmessage xmonad not in \\$PATH: \"$PATH\"; fi")
+    , ((modMask,               xK_q     ), spawn restartXMonadCommand)
+
     ]
     ++ printscreenShortcuts conf
     ++ workspaceShortcuts conf

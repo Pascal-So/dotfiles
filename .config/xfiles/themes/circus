@@ -1,0 +1,24 @@
+! Base16 Circus
+! Author: Stephan Boyer (https://github.com/stepchowfun) and Esther Wang (https://github.com/ewang12)
+
+#define fg        #c7c7c7
+#define bg        #121212
+#define c_bg      #a0a0a0
+#define c_fg      #191919
+
+#define blk       #191919
+#define red       #ef585c
+#define grn       #84b97c
+#define ylw       #c3ba63
+#define blu       #66a1e7
+#define mag       #b888e2
+#define cyn       #4bb1a7
+#define wht       #a7a7a7
+#define blk2      #5f5a60
+#define red2      #ef585c
+#define grn2      #84b97c
+#define ylw2      #c3ba63
+#define blu2      #66a1e7
+#define mag2      #b888e2
+#define cyn2      #4bb1a7
+#define wht2      #ffffff
