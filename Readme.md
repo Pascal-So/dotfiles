@@ -1,6 +1,12 @@
 # Dotfiles
 
-Running xmonad with dmenu on Arch Linux
+Running xmonad on Arch Linux
+
+Uses:
+* xmobar
+* rofi
+* dunst
+* stalonetray
 
 ![screenshot](.arch_setup.png)
 
