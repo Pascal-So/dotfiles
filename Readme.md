@@ -7,6 +7,7 @@ Uses:
 * rofi
 * dunst
 * stalonetray
+* urxvt
 
 ![screenshot](.arch_setup.png)
 

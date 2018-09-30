@@ -1,0 +1,7 @@
+#include ".config/xfiles/themes/circus"
+
+! include colors after the theme
+#include ".config/xfiles/colors"
+
+#include ".config/xfiles/urxvt"
+
