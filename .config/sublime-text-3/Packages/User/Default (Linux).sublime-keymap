@@ -1,3 +1,8 @@
 [
-    {"keys": ["ctrl+shift+o"], "command": "prompt_open_folder"}
+    {"keys": ["ctrl+shift+o"], "command": "prompt_open_folder"},
+    { "keys": ["shift+delete"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Line.sublime-macro"} },
+    { "keys": ["ctrl+up"], "command": "scroll_lines", "args": {"amount": 3.0 } },
+    { "keys": ["ctrl+down"], "command": "scroll_lines", "args": {"amount": -3.0 } },
+    { "keys": ["ctrl+b"], "command": "show_overlay", "args": {"overlay": "command_palette"} },
+    { "keys": ["ctrl+space"], "command": "auto_complete" }
 ]

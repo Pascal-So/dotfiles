@@ -2,6 +2,7 @@ alias ga="git add"
 alias gd="git diff"
 alias gc="git commit"
 alias go="git checkout"
+alias gs="git status"
 
 alias fucking=sudo
 

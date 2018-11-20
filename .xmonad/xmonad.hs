@@ -27,7 +27,7 @@ myTerminal :: String
 myTerminal = "urxvt"
 
 lockCommand :: String
-lockCommand = "i3lock -c 121212 -l bbbbbb -O 0.03 -o bbbbbb --no-input-visualisation -F 45 -R 160 -e"
+lockCommand = "i3lock -c 121212 -l bbbbbb -O 0.03 -o bbbbbb --no-input-visualisation -F 70 -R 550 -e -X 220 -Y 140"
 
 restartXMonadCommand :: String
 restartXMonadCommand = "if type xmonad; then xmonad --recompile && xmonad --restart; else xmessage xmonad not in \\$PATH: \"$PATH\"; fi"
@@ -68,6 +68,9 @@ myManageHook = composeAll
     , className =? "Chromium"                  --> doShift (myWorkspaces !! 1)
     , className =? "Google-chrome"             --> doShift (myWorkspaces !! 1)
     , className =? "Firefox"                   --> doShift (myWorkspaces !! 1)
+
+    , className =? "emacs"                     --> doShift (myWorkspaces !! 2)
+    , className =? "subl3"                     --> doShift (myWorkspaces !! 2)
     , manageDocks
     ]
 

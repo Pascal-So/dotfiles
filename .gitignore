@@ -18,6 +18,8 @@
 !.config/xfiles/*
 !.config/xfiles/themes/*
 
+!.Xresources
+
 !.config/rofi
 !.config/rofi/config
 !.config/sublime-text-3

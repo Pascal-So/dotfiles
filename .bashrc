@@ -44,8 +44,10 @@ fi
 PATH=$PATH:$HOME/.local/bin
 PATH=$PATH:$HOME/.cabal/bin
 PATH=$PATH:$HOME/scripts
-
+PATH=$PATH:$HOME/.node_modules/bin
 export PATH
+export npm_config_prefix=~/.node_modules
+
 
 source ~/code/bashprompt/bashprompt.sh
 

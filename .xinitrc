@@ -1,6 +1,5 @@
-rofi &
+# rofi &
 
-xmobar &
 stalonetray &
 nm-applet &
 
