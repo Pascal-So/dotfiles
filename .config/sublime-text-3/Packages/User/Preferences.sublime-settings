@@ -4,12 +4,13 @@
 	"auto_find_in_selection": true,
 	"auto_match_enabled": true,
 	"bold_folder_labels": true,
-	"font_size": 14,
+	"font_size": 13,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
 	"line_padding_bottom": 5,
 	"line_padding_top": 3,
-	"translate_tabs_to_spaces": true
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true
 }
