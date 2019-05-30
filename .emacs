@@ -25,3 +25,27 @@
 (setq-default indent-tabs-mode nil)
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
+
+(require 'ps-ccrypt "ps-ccrypt.el")
+
+
+;;;;;;;;;;;;; ORG MODE ;;;;;;;;;;;;;;;;;;
+
+(defun setup-org-keybindings ()
+  ;; fix window move
+  (define-key org-mode-map [S-left] nil)
+  (define-key org-mode-map [S-right] nil)
+  (define-key org-mode-map [S-up] nil)
+  (define-key org-mode-map [S-down] nil)
+
+  ;; tree navigation
+  (define-key org-mode-map [C-c C-b] nil)
+  (define-key org-mode-map [C-c C-f] nil)
+  (define-key org-mode-map [C-c C-u] nil)
+  (define-key org-mode-map [C-c C-d] nil)
+  (define-key org-mode-map [C-S-up] 'outline-backward-same-level)
+  (define-key org-mode-map [C-S-down] 'outline-forward-same-level)
+  (define-key org-mode-map [C-S-left] 'outline-up-heading)
+  (define-key org-mode-map [C-S-right] nil))
+
+(eval-after-load "org" '(setup-org-keybindings))

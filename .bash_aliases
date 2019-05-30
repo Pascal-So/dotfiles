@@ -6,7 +6,7 @@ alias gs="git status"
 
 alias fucking=sudo
 
-function swap()         
+function swap()
 {
     local TMPFILE=tmp.$$
     mv -i "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE $2
@@ -21,3 +21,6 @@ alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 
 alias subl=subl3
+
+alias e=emacs
+alias s=subl
