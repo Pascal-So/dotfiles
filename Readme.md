@@ -1,16 +1,6 @@
 # Dotfiles
 
-Running xmonad on Arch Linux
-
-Uses:
-* xmobar
-* rofi
-* dunst
-* stalonetray
-* urxvt
-
-![screenshot](.arch_setup.png)
-
+This used to be an xmonad setup with the git project root at \~, now I've toned it down a bit and it's just some symlink targets.
 
 ## Some additional commands
 ```bash
