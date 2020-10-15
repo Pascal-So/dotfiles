@@ -1,8 +1,10 @@
 alias ga="git add"
 alias gd="git diff"
+alias gds="git diff --staged"
 alias gc="git commit"
 alias go="git checkout"
 alias gs="git status"
+alias gl="git lgb"
 
 alias fucking=sudo
 
@@ -20,7 +22,18 @@ alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 
-alias subl=subl3
+alias cdtmp='cd $(mktemp -d)'
 
+alias subl=subl3
+alias ocli="octave-cli"
 alias e=emacs
 alias s=subl
+alias yt2mp3='youtube-dl --extract-audio --audio-format mp3'
+
+alias ni=ninja
+
+alias cds="cd /mnt/kosmos/documents/eth/sem7"
+alias cdk="cd /mnt/kosmos"
+
+alias la="ls -ahop"
+alias lt="ls -ahoptr"
