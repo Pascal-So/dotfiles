@@ -37,9 +37,15 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-PATH=$PATH:$HOME/scripts
-export PATH
+if [ -d $HOME/scripts ]; then
+    PATH=$PATH:$HOME/scripts
+    export PATH
+fi
 
 if [ -f ~/code/bashprompt/bashprompt.sh ]; then
     source ~/code/bashprompt/bashprompt.sh
+fi
+
+if [ -f ~/src/bashprompt/bashprompt.sh ]; then
+    source ~/src/bashprompt/bashprompt.sh
 fi

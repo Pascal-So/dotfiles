@@ -1,0 +1,296 @@
+
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $term alacritty
+
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+# set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu rofi -no-lazy-grab -show drun -modi drun -theme "$HOME/.config/rofi/launcher_theme.rasi" -run-command "swaymsg exec {cmd}"
+
+focus_follows_mouse no
+mouse_warping none
+
+bindsym $mod+e exec nemo
+bindsym $mod+p exec wdisplays
+bindsym $mod+o exec python $HOME/.config/sway/switch_window.py
+
+bindsym XF86AudioMicMute exec brightnessctl set +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+gaps inner 8
+smart_gaps on
+
+#todo: no borders, only title bar
+
+# bindsym $mod+Shift+b border toggle
+
+output * bg $HOME/.config/sway/post.jpg fill
+
+exec_always {
+    # gsettings set org.gnome.desktop.interface gtk-theme 'Breeze-Dark'
+    gsettings set org.gnome.desktop.interface gtk-theme 'Sweet-mars'
+    gsettings set org.gnome.desktop.interface icon-theme 'Sweet-Red'
+}
+
+
+bindsym $mod+Control+KP_1 exec swaymsg input type:tablet_tool map_to_output $(swaymsg -t get_outputs | jq -r '.[0].name')
+bindsym $mod+Control+KP_2 exec swaymsg input type:tablet_tool map_to_output $(swaymsg -t get_outputs | jq -r '.[1].name')
+
+input type:tablet_tool map_to_output HDMI-A-3
+
+for_window [app_id=pavucontrol] floating enable
+for_window [title="Firefox — Sharing Indicator"] floating enable
+
+
+bindsym Print exec ~/.config/sway/screenshot.py
+bindsym Shift+Print exec ~/.config/sway/screenshot.py --full
+bindsym Control+Print exec ~/.config/sway/screenshot.py --save
+bindsym Control+Shift+Print exec ~/.config/sway/screenshot.py --full --save
+bindsym Mod4+Print exec ~/.config/sway/screenshot.py --hires
+bindsym Mod4+Shift+Print exec ~/.config/sway/screenshot.py --full --hires
+bindsym Mod4+Control+Print exec ~/.config/sway/screenshot.py --hires --save
+bindsym Mod4+Control+Shift+Print exec ~/.config/sway/screenshot.py --full --save --hires
+
+
+#
+# Titlebars
+#
+# font pango:KanitMedium 10
+
+# default_border normal 0
+# hide title bars
+default_border pixel 1
+default_floating_border pixel 0
+
+# default_floating_border normal
+# hide_edge_borders none
+
+titlebar_border_thickness 1
+titlebar_padding 10 8
+
+set $col_tx #ffffff
+set $col_hl #E38A90
+set $col_b1 #1e2327
+set $col_b2 #1a1e21
+# class                     border  backgr. text    indicator child_border
+    client.focused          $col_hl $col_b2 $col_tx #5e81ac   $col_hl
+    client.focused_inactive $col_b1 $col_b1 $col_tx $col_b1   $col_b1
+    client.unfocused        $col_b2 $col_b2 $col_tx $col_b1   $col_b1
+    client.urgent           #bf616a #bf616a $col_tx #d08770   #d08770
+
+smart_borders on
+
+exec_always mako --font 'Source Code Pro 10' --background-color '$col_b1' --text-color '#A8A9AD' --default-timeout 5000 --width 400 --border-radius 2 --border 3 --border-color '#000000' --padding 18
+
+# hide_edge_borders --i3 smart
+
+
+### Output configuration
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+output HDMI-A-3 position 1920,0
+output eDP-1 position 0,0
+
+### Idle configuration
+#
+# Example configuration:
+#
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+#          before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+input * {
+    xkb_layout "gb,ch,ru"
+    xkb_variant ",,"
+    xkb_options "caps:escape,shift:both_capslock,grp:win_space_toggle,grp_led:scroll"
+}
+
+input * repeat_delay 150
+input * repeat_rate 60
+
+input * xkb_numlock enable
+
+### Key bindings
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Kill focused window
+    bindsym $mod+Shift+q kill
+
+    # Start your launcher
+    bindsym $mod+d exec $menu
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t custom -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+
+    # Move focus by screen
+    bindsym $mod+Left focus output left
+    bindsym $mod+Right focus output right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+
+    # Move the focused window to the other screen
+    bindsym $mod+Shift+Left move to output left
+    bindsym $mod+Shift+Right move to output right
+
+
+#
+# Workspaces:
+#
+    # Switch to workspace
+    bindsym $mod+KP_1 workspace number 1
+    bindsym $mod+KP_2 workspace number 2
+    bindsym $mod+KP_3 workspace number 3
+    bindsym $mod+KP_4 workspace number 4
+    bindsym $mod+KP_5 workspace number 5
+    bindsym $mod+KP_6 workspace number 6
+    bindsym $mod+KP_7 workspace number 7
+    bindsym $mod+KP_8 workspace number 8
+    bindsym $mod+KP_9 workspace number 9
+    bindsym $mod+KP_0 workspace number 10
+
+    # Move focused container to workspace
+    bindsym $mod+Shift+KP_End    move window to workspace number 1
+    bindsym $mod+Shift+KP_Down   move window to workspace number 2
+    bindsym $mod+Shift+KP_Next   move window to workspace number 3
+    bindsym $mod+Shift+KP_Left   move window to workspace number 4
+    bindsym $mod+Shift+KP_Begin  move window to workspace number 5
+    bindsym $mod+Shift+KP_Right  move window to workspace number 6
+    bindsym $mod+Shift+KP_Home   move window to workspace number 7
+    bindsym $mod+Shift+KP_Up     move window to workspace number 8
+    bindsym $mod+Shift+KP_Prior  move window to workspace number 9
+    bindsym $mod+Shift+KP_Insert move window to workspace number 10
+
+    bindsym $mod+Ctrl+$right move workspace to output right
+    bindsym $mod+Ctrl+Right move workspace to output right
+
+    bindsym $mod+Ctrl+$left move workspace to output left
+    bindsym $mod+Ctrl+Left move workspace to output left
+
+
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+b splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+w layout tabbed
+    bindsym $mod+s layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+Tab fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+f floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    swaybar_command waybar
+}
+
+include /etc/sway/config.d/*

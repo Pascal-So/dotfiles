@@ -1,0 +1,136 @@
+* {
+    border: none;
+    border-radius: 0;
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(43, 48, 59, 0.5);
+    border-bottom: 2px solid rgba(30, 30, 30, 0.1);
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+window#waybar.termite {
+    background-color: #3F3F3F;
+}
+
+window#waybar.chromium {
+    background-color: #000000;
+    border: none;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: #ffffff;
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -2px transparent;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 -2px #ffffff;
+}
+
+#workspaces button.focused {
+    background-color: #242A2F; /* #64727D; */
+    box-shadow: inset 0 -2px #C0C3CA;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+#mode {
+    background-color: #64727D;
+    border-bottom: 2px solid #ffffff;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#mpd {
+    padding: 0 10px;
+    margin: 0 0px;
+    /*color: #ffffff;*/
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+
+label:focus {
+    background-color: #000000;
+}
+
+.modules-right>widget>label {
+    background-color: #1e2327;
+    border-right: 1.5px solid #767093;
+    border-bottom: 1px solid #767093;
+
+    /*border-right: 1.5px solid #1a1a1a;*/
+    color: #A8A9AD;
+    padding: 0 10px;
+    margin: 0 0px;
+    /* #1e2327 */
+    /* #1a1e21 */
+}
+
+.modules-right>widget:first-child>label {
+    border-bottom-left-radius: 4px;
+}
+
+@keyframes blink {
+    to {
+        background-color: #1e2327;
+        color: #A8A9AD;
+    }
+}
+
+#custom-kbd.ch,
+#custom-kbd.ru,
+#custom-kbd.unknown,
+#network.disconnected {
+    background-color: #502727;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #502727;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
