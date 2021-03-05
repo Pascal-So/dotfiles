@@ -37,3 +37,7 @@ alias cdk="cd /mnt/kosmos"
 
 alias la="ls -ahop"
 alias lt="ls -ahoptr"
+
+alias cmr="cmake -DCMAKE_BUILD_TYPE=Release"
+alias cmd="cmake -DCMAKE_BUILD_TYPE=Debug"
+alias cmrd="cmake -DCMAKE_BUILD_TYPE=Relwithdebinfo"
