@@ -30,7 +30,7 @@ smart_gaps on
 
 # bindsym $mod+Shift+b border toggle
 
-output * bg $HOME/.config/sway/post.jpg fill
+output * bg $HOME/.config/sway/post2.jpg fill
 
 exec_always {
     # gsettings set org.gnome.desktop.interface gtk-theme 'Breeze-Dark'
@@ -134,6 +134,10 @@ input * {
     xkb_options "caps:escape,shift:both_capslock,grp:win_space_toggle,grp_led:scroll"
 }
 
+bindsym $mod+KP_1 input * xkb_switch_layout 0
+bindsym $mod+KP_2 input * xkb_switch_layout 1
+bindsym $mod+KP_3 input * xkb_switch_layout 2
+
 input * repeat_delay 150
 input * repeat_rate 60
 
@@ -192,16 +196,16 @@ input * xkb_numlock enable
 # Workspaces:
 #
     # Switch to workspace
-    bindsym $mod+KP_1 workspace number 1
-    bindsym $mod+KP_2 workspace number 2
-    bindsym $mod+KP_3 workspace number 3
-    bindsym $mod+KP_4 workspace number 4
-    bindsym $mod+KP_5 workspace number 5
-    bindsym $mod+KP_6 workspace number 6
-    bindsym $mod+KP_7 workspace number 7
-    bindsym $mod+KP_8 workspace number 8
-    bindsym $mod+KP_9 workspace number 9
-    bindsym $mod+KP_0 workspace number 10
+    bindsym $mod+Mod1+KP_1 workspace number 1
+    bindsym $mod+Mod1+KP_2 workspace number 2
+    bindsym $mod+Mod1+KP_3 workspace number 3
+    bindsym $mod+Mod1+KP_4 workspace number 4
+    bindsym $mod+Mod1+KP_5 workspace number 5
+    bindsym $mod+Mod1+KP_6 workspace number 6
+    bindsym $mod+Mod1+KP_7 workspace number 7
+    bindsym $mod+Mod1+KP_8 workspace number 8
+    bindsym $mod+Mod1+KP_9 workspace number 9
+    bindsym $mod+Mod1+KP_0 workspace number 10
 
     # Move focused container to workspace
     bindsym $mod+Shift+KP_End    move window to workspace number 1
