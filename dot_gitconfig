@@ -9,3 +9,5 @@
 	default = simple
 [core]
 	editor = emacs
+[init]
+	defaultBranch = main

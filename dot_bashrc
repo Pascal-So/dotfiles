@@ -39,8 +39,13 @@ fi
 
 if [ -d $HOME/scripts ]; then
     PATH=$PATH:$HOME/scripts
-    export PATH
 fi
+
+if [ -d $HOME/code/scripts ]; then
+    PATH=$PATH:$HOME/code/scripts
+fi
+
+PATH=$PATH:$HOME/.local/bin
 
 if [ -f ~/code/bashprompt/bashprompt.sh ]; then
     source ~/code/bashprompt/bashprompt.sh
@@ -48,4 +53,10 @@ fi
 
 if [ -f ~/src/bashprompt/bashprompt.sh ]; then
     source ~/src/bashprompt/bashprompt.sh
+fi
+
+export PATH
+
+if [[ -f /usr/share/fzf/key-bindings.bash ]]; then 
+    . /usr/share/fzf/key-bindings.bash
 fi
