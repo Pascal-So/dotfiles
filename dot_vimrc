@@ -1,0 +1,102 @@
+" vim: set foldmethod=marker :
+
+set nocompatible
+
+syntax on
+
+set updatetime=100
+
+"" Shortcuts {{{
+
+let mapleader=","
+set timeout timeoutlen=500
+
+nnoremap <C-PageUp> :tabbprevious<CR>
+nnoremap <C-PageDown> :tabnext<CR>
+
+nnoremap <PageUp> <C-u>
+nnoremap <PageDown> <C-d>
+
+inoremap <Nul> <C-x><C-o>
+
+" from https://superuser.com/a/1120318
+"   edit vimrc
+nnoremap gev :e $MYVIMRC<CR>
+"   reload vimrc
+nnoremap gsv :so $MYVIMRC<CR>
+
+nnoremap <leader>t :tabe<CR>
+nnoremap <leader>b :Windows<CR>
+nnoremap <leader>e :NERDTreeFocus<CR>
+
+"" }}}
+
+"" Ale {{{
+
+set omnifunc=ale#completion#OmniFunc
+let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
+let g:ale_linters = {'rust': ['analyzer']}
+let g:ale_rust_rls_toolchain = 'stable'
+let g:ale_hover_to_floating_preview=1
+
+nnoremap <F12> :ALEGoToDefinition<CR>
+inoremap <F12> :ALEGoToDefinition<CR>
+nnoremap <leader>k :ALEHover<CR>
+
+"" }}}
+
+"" Plugins {{{
+call plug#begin('~/.vim/plugged')
+    Plug 'preservim/nerdtree'
+
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+
+
+    Plug 'airblade/vim-gitgutter'
+
+    Plug 'preservim/nerdcommenter'
+
+    Plug 'dense-analysis/ale'
+
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'vim-airline/vim-airline'
+    Plug 'thedenisnikulin/vim-cyberpunk'
+
+call plug#end()
+"" }}}
+
+"" Commenting {{{
+nnoremap <C-_> :call nerdcommenter#Comment("n", "Toggle")<CR>
+vnoremap <C-_> :call nerdcommenter#Comment("n", "Toggle")<CR>
+let g:NERDSpaceDelims = 1
+"" }}}
+
+"" FZF {{{
+nnoremap <C-p> :Files<CR>
+nnoremap <C-h> :History<CR>
+let g:fzf_preview_window = 'right:50%'
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6  }  }
+"" }}}
+
+"" Visuals {{{
+set termguicolors
+colorscheme cyberpunk
+let g:airline_theme='tomorrow'
+
+set number relativenumber
+set nu rnu
+"" }}}
+
+set wildmode=longest,list,full
+set wildmenu
+
+cabbrev help tab help
+cabbrev h tab help
+
+" from https://www.reddit.com/r/vim/comments/re1msa/comment/ho4s06r/
+" save as sudo
+cnoremap w!! w !sudo tee "%" > /dev/null<CR><CR>
+
+
