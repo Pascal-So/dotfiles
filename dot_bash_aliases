@@ -32,7 +32,7 @@ alias yt2mp3='youtube-dl --extract-audio --audio-format mp3'
 
 alias ni=ninja
 
-alias cds="cd /mnt/kosmos/documents/eth/sem7"
+alias cds="cd /mnt/kosmos/documents/eth/"
 alias cdk="cd /mnt/kosmos"
 
 alias la="ls -ahop"

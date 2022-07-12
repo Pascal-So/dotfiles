@@ -19,8 +19,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=10000000
-HISTFILESIZE=20000000
+HISTSIZE=
+HISTFILESIZE=
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -45,7 +45,11 @@ if [ -d $HOME/code/scripts ]; then
     PATH=$PATH:$HOME/code/scripts
 fi
 
-PATH=$PATH:$HOME/.local/bin
+if [ -d $HOME/code/tempcontainerz/scripts ]; then
+    PATH=$PATH:$HOME/code/tempcontainerz/scripts
+fi
+
+PATH=$PATH:$HOME/code
 
 if [ -f ~/code/bashprompt/bashprompt.sh ]; then
     source ~/code/bashprompt/bashprompt.sh
@@ -55,8 +59,12 @@ if [ -f ~/src/bashprompt/bashprompt.sh ]; then
     source ~/src/bashprompt/bashprompt.sh
 fi
 
+
 export PATH
 
-if [[ -f /usr/share/fzf/key-bindings.bash ]]; then 
+if [[ -f /usr/share/fzf/key-bindings.bash ]]; then
     . /usr/share/fzf/key-bindings.bash
 fi
+
+# export PIP_REQUIRE_VIRTUALENV=true
+
