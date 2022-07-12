@@ -1,6 +1,5 @@
 {
     "workbench.colorTheme": "SynthWave '84",
-    "window.zoomLevel": 1,
     "synthwave84.brightness": 1,
     "cmake.configureOnOpen": true,
     "cmake.buildDirectory": "${workspaceFolder}/build-${buildType}",
@@ -8,5 +7,23 @@
     "gitlens.codeLens.enabled": false,
     "rust.rust-analyzer.releaseTag": "stable",
     "rust.rust-analyzer.path": "rust-analyzer",
-    "rust-client.revealOutputChannelOn": "warn"
+    "rust-client.revealOutputChannelOn": "warn",
+    "gitlens.defaultGravatarsStyle": "retro",
+    "editor.autoClosingBrackets": "never",
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "html.autoClosingTags": false,
+    "typescript.autoClosingTags": false,
+    "javascript.autoClosingTags": false,
+    "editor.autoSurround": "never",
+    "editor.autoIndent": "brackets",
+    "editor.unicodeHighlight.allowedCharacters": {
+        "σ": true
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "window.zoomLevel": 2
 }
