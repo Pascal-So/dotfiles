@@ -19,8 +19,9 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=
-HISTFILESIZE=
+# negative values mean unlimited
+HISTSIZE=-1
+HISTFILESIZE=-1
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -35,6 +36,11 @@ shopt -s globstar
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
+fi
+
+
+if [ -d $HOME/.cargo/bin ]; then
+    PATH=$PATH:$HOME/.cargo/bin
 fi
 
 if [ -d $HOME/scripts ]; then
@@ -66,5 +72,9 @@ if [[ -f /usr/share/fzf/key-bindings.bash ]]; then
     . /usr/share/fzf/key-bindings.bash
 fi
 
+[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+
 # export PIP_REQUIRE_VIRTUALENV=true
+
+source /usr/share/nvm/init-nvm.sh
 

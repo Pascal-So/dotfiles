@@ -6,6 +6,8 @@ alias go="git checkout"
 alias gs="git status"
 alias gl="git lgb"
 
+alias inode="stat -c %i"
+
 alias fucking=sudo
 
 function swap()
@@ -41,3 +43,5 @@ alias lt="ls -ahoptr"
 alias cmr="cmake -DCMAKE_BUILD_TYPE=Release"
 alias cmd="cmake -DCMAKE_BUILD_TYPE=Debug"
 alias cmrd="cmake -DCMAKE_BUILD_TYPE=Relwithdebinfo"
+
+alias hx=helix

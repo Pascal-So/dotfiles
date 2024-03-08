@@ -22,8 +22,45 @@
     "editor.autoSurround": "never",
     "editor.autoIndent": "brackets",
     "editor.unicodeHighlight.allowedCharacters": {
-        "σ": true
+        "σ": true,
+        "′": true
     },
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "notebook.output.textLineLimit": 135,
+    "editor.inlayHints.fontSize": 9,
+    "rust-analyzer.inlayHints.lifetimeElisionHints.enable": "skip_trivial",
+    "rust-analyzer.server.path": null,
+    "Lua.telemetry.enable": false,
+    "github.copilot.advanced": {
+        "debug.overrideEngine": "codegen",
+        "debug.testOverrideProxyUrl": "http://localhost:5000",
+        "debug.overrideProxyUrl": "http://localhost:5000"
+    },
+    "codeium.enableConfig": {
+        "*": true,
+        "rust": true,
+        "php": true,
+        "tex": false,
+        "latex": false
+    },
+    "[python]": {
+        "editor.formatOnType": true,
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "notebook.output.scrolling": true,
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "terminal.integrated.inheritEnv": false,
+    "codeium.enableCodeLens": false,
+    "dotnetAcquisitionExtension.enableTelemetry": false,
+    "editor.autoClosingOvertype": "never",
+    "editor.autoClosingDelete": "never",
+    "editor.autoClosingQuotes": "never",
     "diffEditor.ignoreTrimWhitespace": false,
-    "window.zoomLevel": 2
+    "jupyter.askForKernelRestart": false,
+    "haskell.manageHLS": "PATH"
 }
