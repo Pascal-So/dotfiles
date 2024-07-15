@@ -1,0 +1,23 @@
+theme="dark_plus"
+
+[editor]
+auto-pairs = false
+rulers = [80, 120]
+bufferline = "multiple"
+line-number = "relative"
+
+[editor.file-picker]
+hidden=false
+
+[keys.normal]
+"A-." = ":buffer-next"
+"A-," = ":buffer-previous"
+"A-w" = ":buffer-close"
+"C-d" = ["search_selection", "select_mode", "extend_search_next", "exit_select_mode"]
+
+[keys.select]
+"C-d" = ["search_selection", "extend_search_next", "exit_select_mode"]
+
+[keys.normal." "]
+"C-f" = "file_picker_in_current_buffer_directory"
+
