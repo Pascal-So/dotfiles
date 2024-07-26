@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "SynthWave '84",
+    "workbench.colorTheme": "Bearded Theme feat. Melle Julie",
     "synthwave84.brightness": 1,
     "cmake.configureOnOpen": true,
     "cmake.buildDirectory": "${workspaceFolder}/build-${buildType}",
@@ -62,5 +62,22 @@
     "editor.autoClosingQuotes": "never",
     "diffEditor.ignoreTrimWhitespace": false,
     "jupyter.askForKernelRestart": false,
-    "haskell.manageHLS": "PATH"
+    "haskell.manageHLS": "PATH",
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "html.autoCreateQuotes": false,
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "cmake.pinnedCommands": [
+        "workbench.action.tasks.configureTaskRunner",
+        "workbench.action.tasks.runTask"
+    ],
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }

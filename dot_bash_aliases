@@ -45,3 +45,4 @@ alias cmd="cmake -DCMAKE_BUILD_TYPE=Debug"
 alias cmrd="cmake -DCMAKE_BUILD_TYPE=Relwithdebinfo"
 
 alias hx=helix
+alias pn=pnpm

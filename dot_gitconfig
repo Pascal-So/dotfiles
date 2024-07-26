@@ -5,9 +5,10 @@
 [user]
 	email = p@pascalsommer.ch
 	name = Pascal Sommer
+	signingkey = 55C82F8A0BCD396A
 [push]
 	default = simple
 [core]
-	editor = emacs
+	editor = helix
 [init]
 	defaultBranch = main
