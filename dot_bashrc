@@ -43,6 +43,10 @@ if [ -d $HOME/.cargo/bin ]; then
     PATH=$PATH:$HOME/.cargo/bin
 fi
 
+if [ -d $HOME/.ghcup/bin ]; then
+    PATH=$PATH:$HOME/.ghcup/bin
+fi
+
 if [ -d $HOME/scripts ]; then
     PATH=$PATH:$HOME/scripts
 fi
@@ -51,8 +55,8 @@ if [ -d $HOME/code/scripts ]; then
     PATH=$PATH:$HOME/code/scripts
 fi
 
-if [ -d $HOME/code/tempcontainerz/scripts ]; then
-    PATH=$PATH:$HOME/code/tempcontainerz/scripts
+if [ -d $HOME/code/projects/tempcontainerz/scripts ]; then
+    PATH=$PATH:$HOME/code/projects/tempcontainerz/scripts
 fi
 
 PATH=$PATH:$HOME/code

@@ -40,6 +40,8 @@ auto-format = false
 plugins.pyls_mypy.enabled = true
 plugins.pyls_mypy.live_mode = true
 
+############################ RUST #########################################
+
 [language-server.rust-analyzer]
 config = { cargo = { allFeatures = true } }
 
@@ -50,7 +52,16 @@ command = "tinymist"
 
 [[language]]
 name = "typst"
-language-servers = ["tinymist"]
+language-servers = ["tinymist", "ltex-ls-plus"]
+
+########################## LTEX LS PLUS #################################
+
+[language-server.ltex-ls-plus.config]
+ltex.diagnosticSeverity = "warning"
+ltex.ltex-ls.logLevel = "warning"
+ltex.language = "en-GB"
+ltex.disabledRules = { "en-GB" = ["PROFANITY"] }
+ltex.dictionary = { "en-GB" = ["GiB"] }
 
 # from GEA NB27
 # [[language]]
