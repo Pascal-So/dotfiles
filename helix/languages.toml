@@ -33,12 +33,25 @@ formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
 
 [[language]]
 name = "python"
+roots = ["pyproject.toml", ".venv/"]
 language-servers = ["pylsp", "basedpyright", "ruff"]
-auto-format = false
+auto-format = true
+formatter = { command = "uv", args = ["run", "ruff","format", "-" ] }
 
 [language-server.pylsp.config.pylsp]
 plugins.pyls_mypy.enabled = true
 plugins.pyls_mypy.live_mode = true
+
+[language-server.basedpyright]
+environment = { "LC_ALL" = "en_GB.UTF8" }
+command = "uv"
+args = ["run", "basedpyright-langserver", "--stdio"]
+required-root-patterns = ["pyproject.toml"]
+
+[language-server.ruff]
+command = "uv"
+args = ["run", "ruff", "server"]
+environment = { "RUFF_TRACE" = "messages" }
 
 ############################ RUST #########################################
 
@@ -52,7 +65,10 @@ command = "tinymist"
 
 [[language]]
 name = "typst"
-language-servers = ["tinymist", "ltex-ls-plus"]
+language-servers = [
+  "tinymist",
+  # "ltex-ls-plus",
+]
 
 ########################## LTEX LS PLUS #################################
 
@@ -62,26 +78,3 @@ ltex.ltex-ls.logLevel = "warning"
 ltex.language = "en-GB"
 ltex.disabledRules = { "en-GB" = ["PROFANITY"] }
 ltex.dictionary = { "en-GB" = ["GiB"] }
-
-# from GEA NB27
-# [[language]]
-# name = "python"
-# language-id = "python"
-# roots = ["pyproject.toml", ".venv/"]
-# language-servers = ["basedpyright", "ruff"]
-# auto-format = true
-# formatter = { command = "uvx", args = ["ruff","format", "-" ] }
-# file-types = ["py", "ipynb"]
-# comment-token = "#"
-# shebangs = ["python"]
-# 
-# [language-server.basedpyright]
-# environment = { "LC_ALL" = "en_GB.UTF8" }
-# command = "uv"
-# args = ["run", "basedpyright-langserver", "--stdio"]
-# required-root-patterns = ["pyproject.toml"]
-# 
-# [language-server.ruff]
-# command = "uvx"
-# args = ["ruff","server"]
-# environment = { "RUFF_TRACE" = "messages" }
