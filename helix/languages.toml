@@ -2,32 +2,33 @@
 
 [[language]]
 name = "html"
-formatter = { command = 'npx', args = ["prettier", "--parser", "html"] }
-auto-format = false
+formatter = { command = 'npx', args = ["--offline", "prettier", "--parser", "html"] }
+auto-format = true
 
 [[language]]
 name = "css"
-formatter = { command = 'npx', args = ["prettier", "--parser", "css"] }
+formatter = { command = 'npx', args = ["--offline", "prettier", "--parser", "css"] }
+auto-format = true
 
 [[language]]
 name = "javascript"
-formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
-# auto-format = true
+formatter = { command = 'npx', args = ["--offline", "prettier", "--parser", "typescript"] }
+auto-format = true
 
 [[language]]
 name = "typescript"
-formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
-# auto-format = true
+formatter = { command = 'npx', args = ["--offline", "prettier", "--parser", "typescript"] }
+auto-format = true
 
 [[language]]
 name = "tsx"
-formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
-# auto-format = true
+formatter = { command = 'npx', args = ["--offline", "prettier", "--parser", "typescript"] }
+auto-format = true
 
 [[language]]
 name = "jsx"
-formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
-# auto-format = true
+formatter = { command = 'npx', args = ["--offline", "prettier", "--parser", "typescript"] }
+auto-format = true
 
 ############################ PYTHON ########################################
 
