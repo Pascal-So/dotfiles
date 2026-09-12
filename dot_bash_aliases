@@ -4,7 +4,8 @@ alias gds="git diff --staged"
 alias gc="git commit"
 alias go="git checkout"
 alias gs="git status"
-alias gl="git lgb"
+alias gl="git pull"
+alias gp="git push"
 
 alias inode="stat -c %i"
 
@@ -26,16 +27,7 @@ alias egrep="egrep --color=auto"
 
 alias cdtmp='cd $(mktemp -d)'
 
-# alias subl=subl3
-alias ocli="octave-cli"
-alias e=emacs
-alias s=subl
-alias yt2mp3='youtube-dl --extract-audio --audio-format mp3'
-
 alias ni=ninja
-
-alias cds="cd /mnt/kosmos/documents/eth/"
-alias cdk="cd /mnt/kosmos"
 
 alias la="ls -ahop"
 alias lt="ls -ahoptr"
