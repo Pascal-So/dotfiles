@@ -18,6 +18,19 @@ hidden=false
 [keys.select]
 "C-d" = ["search_selection", "extend_search_next", "exit_select_mode"]
 
-[keys.normal." "]
+[keys.normal.space]
 "C-f" = "file_picker_in_current_buffer_directory"
 "i" = ":toggle lsp.display-inlay-hints"
+
+[keys.normal.space.b]
+# Show git blame
+b = [":sh git blame -L %{cursor_line},%{cursor_line} %{buffer_name}"]
+# Show the git diff of the blame of the current line
+d = [
+  ":sh git show $(git blame -L %{cursor_line},%{cursor_line} %{buffer_name} | cut -d' ' -f1) > /tmp/helix-git-show",
+  ":o /tmp/helix-git-show",
+  ":set-language diff",
+  # sometimes the file is not completely written yet when we open it, so reload it.
+  ":sh sleep 0.1",
+  ":rl"
+]
