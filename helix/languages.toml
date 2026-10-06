@@ -56,7 +56,7 @@ environment = { "RUFF_TRACE" = "messages" }
 ############################ RUST #########################################
 
 [language-server.rust-analyzer]
-config = { cargo = { allFeatures = true } }
+config = { cargo = { allFeatures = true }, check.command="clippy" }
 
 ############################ TYPST ########################################
 
